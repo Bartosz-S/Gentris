@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private GameObject selectedObj;
     private Vector2 followPoint;
     [SerializeField] private float defaultZAxis = 6f;
+    [SerializeField] private float lerpSpeed;
+        
 
     private void Awake()
     {
@@ -63,8 +65,9 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(selectedObj.transform.position.x - followPoint.x) > 0.01f 
             && Mathf.Abs(selectedObj.transform.position.y - followPoint.y) > 0.01f)
         {
-            selectedObj.transform.position = new Vector3(Vector2.Lerp(selectedObj.transform.position, followPoint, Time.deltaTime).x,
-                Vector2.Lerp(selectedObj.transform.position, followPoint, Time.deltaTime).y, defaultZAxis);
+   
+            selectedObj.transform.position = new Vector3(Vector2.Lerp(selectedObj.transform.position, followPoint, lerpSpeed*Time.deltaTime).x,
+                Vector2.Lerp(selectedObj.transform.position, followPoint, lerpSpeed*Time.deltaTime).y, defaultZAxis);
         }
     }
 
