@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -7,6 +8,10 @@ public class PlayerController : MonoBehaviour
     private InputAction Moving;
     private GameObject catchedGameObject;
     private bool hovering = false;
+    [SerializeField] private Vector2 mousePosition = Vector2.zero;
+    [SerializeField] private float speed = 1f;
+    private Ray mouseRay;
+    private RaycastHit hit;
 
     private void Awake()
     {
@@ -36,14 +41,26 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        mouseRay = Camera.main.ScreenPointToRay(mousePosition);
+
+    }
+
+    private void MoveObject(GameObject selectedObject)
+    {
+        catchedGameObject.transform.Translate(new Vector3(mousePosition.x, mousePosition.y, selectedObject.transform.position.z)
+            * speed);
     }
 
     private void catchObject(InputAction.CallbackContext context)
     {
+
         if (hovering)
         {
-
+            if (Physics.Raycast(mouseRay, out hit))
+            {
+                catchedGameObject = hit.collider.gameObject;
+                MoveObject(catchedGameObject);
+            }
         }
         Debug.Log("Catched");
     }
