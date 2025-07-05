@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     private InputAction Moving;
     private bool hovering = false;
     [SerializeField] private Vector2 mousePosition = Vector2.zero;
-    //[SerializeField] private float acceleration = 1f;
     private Ray mouseRay;
     private RaycastHit hit;
     private Camera mainCam;
