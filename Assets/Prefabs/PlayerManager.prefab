@@ -45,4 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mousePosition: {x: 0, y: 0}
-  speed: 1
+  maxSpeed: 0
+  defaultZAxis: 6
