@@ -69,7 +69,7 @@ public class DetectorLogic : MonoBehaviour
     }
     private void StartConnection(GameObject other)
     {
-        SoundFXManager.instance.PlayRandomSoundFXClip(clickSoundClips, Camera.main.transform, 1f);
+        //SoundFXManager.instance.PlayRandomSoundFXClip(clickSoundClips, Camera.main.transform, 1f);
         // Make sure the controlled object has a kinematic rigidbody
         Rigidbody thisRb = transform.parent.GetComponent<Rigidbody>();
         if (thisRb == null)

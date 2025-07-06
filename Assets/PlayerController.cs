@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour
     
     private void PauseGame(InputAction.CallbackContext context)
     {
-        if (!PauseMenu.activeSelf)
+        if (!PauseMenu.activeSelf && Time.timeScale == 1)
         {
             PauseMenu.SetActive(true);
         }
