@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     {
         mousePosition = Mouse.current.position.ReadValue();
         mouseRay = mainCam.ScreenPointToRay(mousePosition);
-        Debug.DrawRay(mouseRay.origin, mouseRay.direction * 20, Color.red);
+        Debug.DrawRay(mouseRay.origin, mouseRay.direction * 200, Color.red);
         if (selected)
         {
             MoveObject();

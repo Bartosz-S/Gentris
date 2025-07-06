@@ -79,7 +79,8 @@ public class DetectorLogic : MonoBehaviour
 
         // Set target position and rotation
         targetPosition = other.transform.parent.position; //Vector3(0, 1, 0);
-        targetRotation = other.transform.parent.rotation * Quaternion.Euler(90, 0, 90);
+
+        targetRotation *= other.transform.parent.rotation * Quaternion.Euler(-90, 0, 0);
         
         // Move the controlled object to default layer
         transform.parent.gameObject.layer = 0; // Default layer
