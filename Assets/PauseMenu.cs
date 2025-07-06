@@ -3,7 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-
+    private void Awake()
+    {
+        gameObject.SetActive(false);
+    }
     public void ReturnToGame()
     {
         Time.timeScale = 1;
