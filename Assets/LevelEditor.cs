@@ -10,8 +10,7 @@ public class LevelEditor : MonoBehaviour
     private void Awake()
     {
         SliderController = GameObject.FindGameObjectWithTag("TimeSlider").GetComponent<TimeBarController>();
-        SliderController.SetTime(timeForLevel);
-        //gameOverScreen = GameObject.FindGameObjectWithTag("GameOver");
+        SliderController.TimeForLevel = timeForLevel;
     }
     private void Update()
     {

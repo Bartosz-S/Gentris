@@ -1,6 +1,10 @@
+using NUnit.Framework;
 using UnityEditor.SearchService;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class ManageMenu : MonoBehaviour
 {
@@ -11,23 +15,17 @@ public class ManageMenu : MonoBehaviour
     {
         mainMenu.SetActive(true);
         selectLevel.SetActive(false);
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void OnLevelSelect()
+    public void OnLevelSelectButton()
     {
         mainMenu.SetActive(false);
         selectLevel.SetActive(true);
+    }
+    public void OnBackToMain()
+    {
+        mainMenu.SetActive(true);
+        selectLevel.SetActive(false);
     }
 }

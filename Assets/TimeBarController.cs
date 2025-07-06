@@ -5,6 +5,11 @@ using UnityEngine.UI;
 public class TimeBarController : MonoBehaviour
 {
     private float timeForLevel = 1f;
+    public float TimeForLevel
+    {
+        set { timeForLevel = value; }
+        get { return timeForLevel; }
+    }
     private float remainTime;
     public float RemainTime
     {
@@ -15,16 +20,16 @@ public class TimeBarController : MonoBehaviour
 
     private void Awake()
     {
-        remainTime = timeForLevel;
+        remainTime = TimeForLevel;
         slider = GetComponent<Slider>();
-        slider.maxValue = remainTime;
         slider.minValue = 0;
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        
+        remainTime = TimeForLevel;
+        slider.maxValue = remainTime;
     }
+
 
     // Update is called once per frame
     void Update()
@@ -40,9 +45,5 @@ public class TimeBarController : MonoBehaviour
     private void UpdateTime()
     {
         remainTime -= Time.deltaTime;
-    }
-    public void SetTime(float time)
-    {
-        timeForLevel = time;
     }
 }
