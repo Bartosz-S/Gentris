@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private PlayerInput playerInput;
     private Controller controller;
     private InputAction Moving;
     private bool hovering = false;
@@ -17,25 +18,32 @@ public class PlayerController : MonoBehaviour
     private Vector2 followPoint;
     [SerializeField] private float defaultZAxis = 6f;
     [SerializeField] private float lerpSpeed;
+    private bool isPaused => Time.timeScale < 0.01f;
+    [SerializeField] private GameObject PauseMenu;
+    private InputAction Pausing;
         
 
     private void Awake()
     {
         controller = new Controller();
-        Moving = controller.Player.CatchObject;
         mainCam = Camera.main;
     }
 
     private void OnEnable()
     {
+        playerInput.SwitchCurrentActionMap("Player");
+        Moving = controller.Player.CatchObject;
+        Pausing = controller.Player.Pause;
         Moving.started += catchObject;
         Moving.canceled += releaseObject;
+        Pausing.performed += PauseGame;
         controller.Enable();
     }
     private void OnDisable()
     {
         Moving.started -= catchObject;
         Moving.canceled -= releaseObject;
+        Pausing.performed -= PauseGame;
         controller.Disable();
     }
 
@@ -80,8 +88,12 @@ public class PlayerController : MonoBehaviour
                 selectedObj = hit.collider.gameObject;
                 //defaultZAxis = selectedObj.transform.position.z;
                 followPoint = new Vector3(hit.point.x, hit.point.y, defaultZAxis);
-                if(selectedObj.layer == LayerMask.NameToLayer("Movable")){
+                if(selectedObj.layer == LayerMask.NameToLayer("Movable") && !isPaused){
                     selected = true;
+                }
+                else
+                {
+                    selected = false;
                 }
             }
         }
@@ -91,6 +103,19 @@ public class PlayerController : MonoBehaviour
     {
         selected = false;
         Debug.Log("Released");
+    }
+    private void PauseGame(InputAction.CallbackContext context)
+    {
+        if (!isPaused)
+        {
+            Time.timeScale = 0;
+            PauseMenu.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            PauseMenu.SetActive(false);
+        }
     }
 
     private void OnMouseOver()
