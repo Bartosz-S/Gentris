@@ -30,6 +30,7 @@ public class LevelEditor : MonoBehaviour
     {
         if (SliderController.RemainTime <= 0 && gameOverScreen.activeSelf == false){
             gameOverScreen.SetActive(true);
+            SliderController.gameObject.transform.parent.gameObject.SetActive(false);
             Debug.Log("Game Over");
             return true;
         }
@@ -47,6 +48,7 @@ public class LevelEditor : MonoBehaviour
             }
         }
         winScreen.SetActive(true);
+        SliderController.gameObject.transform.parent.gameObject.SetActive(false);
         return true;
     }
 }

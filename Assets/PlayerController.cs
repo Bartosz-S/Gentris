@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerInput playerInput;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private bool isPaused => Time.timeScale < 0.01f;
     [SerializeField] private GameObject PauseMenu;
     private InputAction Pausing;
+    private Color selectedObjColor;
        
     private void Awake()
     {
@@ -147,9 +149,18 @@ public class PlayerController : MonoBehaviour
     private void OnMouseOver()
     {
         hovering = true;
+        if(selectedObj != null)
+        {
+            selectedObjColor = selectedObj.GetComponent<Renderer>().material.color;
+            selectedObj.GetComponent<Renderer>().material.color = Color.red;
+        }
     }
     private void OnMouseExit()
     {
         hovering = false;
+        if (selectedObj != null)
+        {
+            selectedObj.GetComponent<Renderer>().material.color = selectedObjColor;
+        }
     }
 }
