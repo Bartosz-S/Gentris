@@ -29,10 +29,11 @@ public class DetectorLogic : MonoBehaviour
         {
             // Smoothly move to target position and rotation
             transform.parent.position = Vector3.Lerp(transform.parent.position, targetPosition, connectionSpeed * Time.deltaTime);
-            transform.parent.rotation = Quaternion.Lerp(transform.parent.rotation, targetRotation, connectionSpeed * Time.deltaTime);
+            transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, targetRotation, connectionSpeed * Time.deltaTime);
             
             // Check if we've reached the target
-            if (Vector3.Distance(transform.parent.position, targetPosition) < 0.01f)
+            if (Vector3.Distance(transform.parent.position, targetPosition) < 0.01f 
+                && Mathf.Abs(Vector3.Angle(transform.parent.position, targetPosition)) < 0.1f)
             {
                 transform.parent.position = targetPosition;
                 transform.parent.rotation = targetRotation;
@@ -45,7 +46,8 @@ public class DetectorLogic : MonoBehaviour
     {
         if(other.gameObject.TryGetComponent<DetectorLogic>(out detected))
         {
-            if(isCorresponding(acidType, detected.acidType) && !isGlued && !isConnecting)
+            if(isCorresponding(acidType, detected.acidType) && !isGlued && !isConnecting
+                && other.gameObject.transform.parent.gameObject.layer != LayerMask.NameToLayer("Movable"))
             {
                 // Only glue if this object is currently selected by the player
                 PlayerController playerController = FindObjectOfType<PlayerController>();
@@ -80,8 +82,15 @@ public class DetectorLogic : MonoBehaviour
         // Set target position and rotation
         targetPosition = other.transform.parent.position; //Vector3(0, 1, 0);
 
-        targetRotation *= other.transform.parent.rotation * Quaternion.Euler(-90, 0, 0);
-        
+        /*Quaternion vector = Quaternion.Euler(-180, 0, 0);
+        targetRotation *= other.transform.parent.rotation * Quaternion.Euler(180,180,180);
+        */
+        float myTargetRotationX = other.transform.parent.rotation.x; //get the X rotation from anotherObject
+        float myTargetRotationY = other.transform.parent.rotation.y; //get the Y rotation from this object
+        float myTargetRotationZ = other.transform.parent.rotation.z; //get the Z rotation from this object
+        Vector3 myEulerAngleRotation = new Vector3(myTargetRotationZ, myTargetRotationX, myTargetRotationY);
+        targetRotation = new Quaternion(myTargetRotationX, myTargetRotationY, myTargetRotationZ, 0);
+
         // Move the controlled object to default layer
         transform.parent.gameObject.layer = 0; // Default layer
         

@@ -50,6 +50,7 @@ MonoBehaviour:
   maxSpeed: 0
   defaultZAxis: 6
   lerpSpeed: 10
+  PauseMenu: {fileID: 0}
 --- !u!114 &-5432719415078913012
 MonoBehaviour:
   m_ObjectHideFlags: 0
