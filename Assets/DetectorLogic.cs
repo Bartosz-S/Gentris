@@ -12,6 +12,10 @@ public class DetectorLogic : MonoBehaviour
     [SerializeField] private Type acidType;
     private DetectorLogic detected;
     private bool isGlued = false;
+    private bool isConnecting = false;
+    private Vector3 targetPosition;
+    private Quaternion targetRotation;
+    private float connectionSpeed = 5f;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,21 +25,35 @@ public class DetectorLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        if (isConnecting && !isGlued)
+        {
+            // Smoothly move to target position and rotation
+            transform.parent.position = Vector3.Lerp(transform.parent.position, targetPosition, connectionSpeed * Time.deltaTime);
+            transform.parent.rotation = Quaternion.Lerp(transform.parent.rotation, targetRotation, connectionSpeed * Time.deltaTime);
+            
+            // Check if we've reached the target
+            if (Vector3.Distance(transform.parent.position, targetPosition) < 0.01f)
+            {
+                transform.parent.position = targetPosition;
+                transform.parent.rotation = targetRotation;
+                isGlued = true;
+                isConnecting = false;
+            }
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.TryGetComponent<DetectorLogic>(out detected))
         {
-            if(isCorresponding(acidType, detected.acidType) && !isGlued)
+            if(isCorresponding(acidType, detected.acidType) && !isGlued && !isConnecting)
             {
                 // Only glue if this object is currently selected by the player
                 PlayerController playerController = FindObjectOfType<PlayerController>();
                 if (playerController != null && playerController.IsObjectSelected(transform.parent.gameObject))
                 {
-                    Glue(other.gameObject);
+                    StartConnection(other.gameObject);
                     playerController.ForceReleaseObject();
-                    Debug.Log("Glued!");
+                    Debug.Log("Connecting...");
                 }
             }
         }
@@ -50,34 +68,22 @@ public class DetectorLogic : MonoBehaviour
         }
         return false;
     }
-    private void Glue(GameObject other)
+    private void StartConnection(GameObject other)
     {
-        // Get the rigidbodies of both objects
+        // Make sure the controlled object has a kinematic rigidbody
         Rigidbody thisRb = transform.parent.GetComponent<Rigidbody>();
-        Rigidbody otherRb = other.transform.parent.GetComponent<Rigidbody>();
+        if (thisRb == null)
+            thisRb = transform.parent.gameObject.AddComponent<Rigidbody>();
         
-        // Make the controlled object non-kinematic so it can be affected by the joint
-        thisRb.isKinematic = false;
-        
-        // Match the rotation of the other object
-        transform.parent.eulerAngles = other.transform.parent.eulerAngles;
-        
-        // Create spring joint on the controlled object
-        SpringJoint springJoint = transform.parent.gameObject.AddComponent<SpringJoint>();
-        springJoint.connectedBody = otherRb;
-        springJoint.autoConfigureConnectedAnchor = false;
-        springJoint.connectedAnchor = Vector3.zero;
-        springJoint.anchor = Vector3.zero;
-        
-        // Configure spring properties for a natural connection
-        springJoint.spring = 500f;
-        springJoint.damper = 100f;
-        springJoint.minDistance = 0f;
-        springJoint.maxDistance = 0.1f;
+        thisRb.isKinematic = true;
+
+        // Set target position and rotation
+        targetPosition = other.transform.parent.position; //Vector3(0, 1, 0);
+        targetRotation = other.transform.parent.rotation * Quaternion.Euler(90, 0, 90);
         
         // Move the controlled object to default layer
         transform.parent.gameObject.layer = 0; // Default layer
         
-        isGlued = true;
+        isConnecting = true;
     }
 }
