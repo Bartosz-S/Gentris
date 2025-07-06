@@ -72,6 +72,26 @@ PrefabInstance:
       propertyPath: acidType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6189989586490480305, guid: aebb11361a201a341913a2b3b62990a9, type: 3}
+      propertyPath: clickSoundClips.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6189989586490480305, guid: aebb11361a201a341913a2b3b62990a9, type: 3}
+      propertyPath: 'clickSoundClips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: f4979281b83693f47b9694c905c35e36, type: 3}
+    - target: {fileID: 6189989586490480305, guid: aebb11361a201a341913a2b3b62990a9, type: 3}
+      propertyPath: 'clickSoundClips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: fed281b5ed3b0e94b8dfca72994071ab, type: 3}
+    - target: {fileID: 6189989586490480305, guid: aebb11361a201a341913a2b3b62990a9, type: 3}
+      propertyPath: 'clickSoundClips.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 3c15fccbd4cb09a48b2703cae986ad8e, type: 3}
+    - target: {fileID: 6189989586490480305, guid: aebb11361a201a341913a2b3b62990a9, type: 3}
+      propertyPath: 'clickSoundClips.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 420a497062f90e54e91085d46bee8981, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -134,6 +154,10 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 98f9fafb98a9a334daca3617387e963f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8a48f43f8e0e0734e9ec20579c3dd1cc, type: 2}
     - target: {fileID: -5754084199372789682, guid: 98f9fafb98a9a334daca3617387e963f, type: 3}
       propertyPath: m_Mesh
       value: 
