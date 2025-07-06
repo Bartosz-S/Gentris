@@ -4,14 +4,14 @@ using UnityEngine.UI;
 
 public class TimeBarController : MonoBehaviour
 {
-    [SerializeField] private float startTime;
-    private float remainTime = 1f;
+    private float timeForLevel = 1f;
+    private float remainTime { set; get; }
     private Slider slider;
     
 
     private void Awake()
     {
-        remainTime = startTime;
+        remainTime = timeForLevel;
         slider = GetComponent<Slider>();
         slider.maxValue = remainTime;
         slider.minValue = 0;
@@ -36,5 +36,9 @@ public class TimeBarController : MonoBehaviour
     private void UpdateTime()
     {
         remainTime -= Time.deltaTime;
+    }
+    public void SetTime(float time)
+    {
+        timeForLevel = time;
     }
 }
