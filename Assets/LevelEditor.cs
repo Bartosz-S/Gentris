@@ -1,9 +1,4 @@
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.UIElements;
-using System.Collections.Generic;
-using System.Linq;
-
 public class LevelEditor : MonoBehaviour
 {
     [SerializeField] private float timeForLevel;

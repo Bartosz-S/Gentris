@@ -3,13 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    private void Awake()
+    private void Start()
     {
         gameObject.SetActive(false);
     }
     public void ReturnToGame()
     {
-        Time.timeScale = 1;
         gameObject.SetActive(false);
     }
     public void ExitToMenu()
@@ -19,5 +18,13 @@ public class PauseMenu : MonoBehaviour
     public void Retry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    private void OnEnable()
+    {
+        Time.timeScale = 0;
+    }
+    private void OnDisable()
+    {
+        Time.timeScale = 1;
     }
 }

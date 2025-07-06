@@ -1,10 +1,4 @@
-using NUnit.Framework;
-using UnityEditor.SearchService;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using System.Collections.Generic;
-using UnityEngine.SceneManagement;
-using UnityEngine.Events;
 
 public class ManageMenu : MonoBehaviour
 {
@@ -27,5 +21,9 @@ public class ManageMenu : MonoBehaviour
     {
         mainMenu.SetActive(true);
         selectLevel.SetActive(false);
+    }
+    public void OnExitButton()
+    {
+        Application.Quit();
     }
 }

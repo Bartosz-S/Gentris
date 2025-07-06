@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
@@ -103,7 +102,7 @@ public class PlayerController : MonoBehaviour
                 selectedObj = hit.collider.gameObject;
                 //defaultZAxis = selectedObj.transform.position.z;
                 followPoint = new Vector3(hit.point.x, hit.point.y, defaultZAxis);
-                if(selectedObj.layer == LayerMask.NameToLayer("Movable") && !isPaused){
+                if(selectedObj.layer == LayerMask.NameToLayer("Movable") && !PauseMenu.activeSelf){
                     selected = true;
                 }
                 else
@@ -136,14 +135,12 @@ public class PlayerController : MonoBehaviour
     
     private void PauseGame(InputAction.CallbackContext context)
     {
-        if (!isPaused)
+        if (!PauseMenu.activeSelf)
         {
-            Time.timeScale = 0;
             PauseMenu.SetActive(true);
         }
         else
         {
-            Time.timeScale = 1;
             PauseMenu.SetActive(false);
         }
     }
