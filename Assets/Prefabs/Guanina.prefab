@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Detector
       objectReference: {fileID: 0}
+    - target: {fileID: 3758966785362982793, guid: aebb11361a201a341913a2b3b62990a9, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6189989586490480305, guid: aebb11361a201a341913a2b3b62990a9, type: 3}
       propertyPath: acidType
       value: 0
@@ -88,15 +92,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 98f9fafb98a9a334daca3617387e963f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.39514
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 98f9fafb98a9a334daca3617387e963f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.1370032
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 98f9fafb98a9a334daca3617387e963f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.8992724
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 98f9fafb98a9a334daca3617387e963f, type: 3}
       propertyPath: m_LocalRotation.w

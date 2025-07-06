@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 public class DetectorLogic : MonoBehaviour
 {
     enum Type
@@ -9,6 +10,7 @@ public class DetectorLogic : MonoBehaviour
         Tean
     }
     [SerializeField] private Type acidType;
+    [SerializeField] private AudioClip[] clickSoundClips;
     private DetectorLogic detected;
     private bool isGlued = false;
     private bool isConnecting = false;
@@ -26,16 +28,13 @@ public class DetectorLogic : MonoBehaviour
     {
         if (isConnecting && !isGlued)
         {
-            // Smoothly move to target position and rotation
+            // Smoothly move to target position
             transform.parent.position = Vector3.Lerp(transform.parent.position, targetPosition, connectionSpeed * Time.deltaTime);
-            transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, targetRotation, connectionSpeed * Time.deltaTime);
             
             // Check if we've reached the target
-            if (Vector3.Distance(transform.parent.position, targetPosition) < 0.01f 
-                && Mathf.Abs(Vector3.Angle(transform.parent.position, targetPosition)) < 0.1f)
+            if (Vector3.Distance(transform.parent.position, targetPosition) < 0.01f)
             {
                 transform.parent.position = targetPosition;
-                transform.parent.rotation = targetRotation;
                 isGlued = true;
                 isConnecting = false;
             }
@@ -45,8 +44,7 @@ public class DetectorLogic : MonoBehaviour
     {
         if(other.gameObject.TryGetComponent<DetectorLogic>(out detected))
         {
-            if(isCorresponding(acidType, detected.acidType) && !isGlued && !isConnecting
-                && other.gameObject.transform.parent.gameObject.layer != LayerMask.NameToLayer("Movable"))
+            if(isCorresponding(acidType, detected.acidType) && !isGlued && !isConnecting)
             {
                 // Only glue if this object is currently selected by the player
                 PlayerController playerController = FindObjectOfType<PlayerController>();
@@ -71,6 +69,7 @@ public class DetectorLogic : MonoBehaviour
     }
     private void StartConnection(GameObject other)
     {
+        SoundFXManager.instance.PlayRandomSoundFXClip(clickSoundClips, Camera.main.transform, 1f);
         // Make sure the controlled object has a kinematic rigidbody
         Rigidbody thisRb = transform.parent.GetComponent<Rigidbody>();
         if (thisRb == null)
@@ -79,17 +78,8 @@ public class DetectorLogic : MonoBehaviour
         thisRb.isKinematic = true;
 
         // Set target position and rotation
-        targetPosition = other.transform.parent.position; //Vector3(0, 1, 0);
-
-        /*Quaternion vector = Quaternion.Euler(-180, 0, 0);
-        targetRotation *= other.transform.parent.rotation * Quaternion.Euler(180,180,180);
-        */
-        float myTargetRotationX = other.transform.parent.rotation.x; //get the X rotation from anotherObject
-        float myTargetRotationY = other.transform.parent.rotation.y; //get the Y rotation from this object
-        float myTargetRotationZ = other.transform.parent.rotation.z; //get the Z rotation from this object
-        Vector3 myEulerAngleRotation = new Vector3(myTargetRotationZ, myTargetRotationX, myTargetRotationY);
-        targetRotation = new Quaternion(myTargetRotationX, myTargetRotationY, myTargetRotationZ, 0);
-
+        targetPosition = new Vector3(other.transform.parent.position.x, other.transform.parent.position.y + 2, other.transform.parent.position.z);
+        
         // Move the controlled object to default layer
         transform.parent.gameObject.layer = 0; // Default layer
         
