@@ -470,7 +470,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7642486838429616987, guid: 7e36b4a6379457c4480f240ea225529f, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -779,7 +779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8900298651502188522, guid: 0092c9818c5ffeb4688b0a5576cedcdd, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1242,7 +1242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6968586250273837199, guid: eb126519ce7dfe145bc33a3c3a5cf92e, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7781856125817588277, guid: eb126519ce7dfe145bc33a3c3a5cf92e, type: 3}
       propertyPath: m_LocalScale.z
@@ -1351,7 +1351,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2253056746806714192, guid: b8d57207be0a60f4689d93fe43faca50, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1416,7 +1416,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8900298651502188522, guid: 0092c9818c5ffeb4688b0a5576cedcdd, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1474,7 +1474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6968586250273837199, guid: eb126519ce7dfe145bc33a3c3a5cf92e, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7781856125817588277, guid: eb126519ce7dfe145bc33a3c3a5cf92e, type: 3}
       propertyPath: m_LocalScale.z
