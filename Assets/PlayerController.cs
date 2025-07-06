@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerInput playerInput;
@@ -21,14 +20,12 @@ public class PlayerController : MonoBehaviour
     private bool isPaused => Time.timeScale < 0.01f;
     [SerializeField] private GameObject PauseMenu;
     private InputAction Pausing;
-        
-
+       
     private void Awake()
     {
         controller = new Controller();
         mainCam = Camera.main;
     }
-
     private void OnEnable()
     {
         playerInput.SwitchCurrentActionMap("Player");
@@ -46,13 +43,11 @@ public class PlayerController : MonoBehaviour
         Pausing.performed -= PauseGame;
         controller.Disable();
     }
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+       
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -64,20 +59,40 @@ public class PlayerController : MonoBehaviour
             MoveObject();
         }
     }
-
     private void MoveObject()
     {
         Physics.Raycast(mouseRay, out hit);
         followPoint = new Vector2(hit.point.x, hit.point.y);
-        if (Mathf.Abs(selectedObj.transform.position.x - followPoint.x) > 0.01f 
-            && Mathf.Abs(selectedObj.transform.position.y - followPoint.y) > 0.01f)
+        
+        Rigidbody rb = selectedObj.GetComponent<Rigidbody>();
+        if (rb != null)
         {
-   
-            selectedObj.transform.position = new Vector3(Vector2.Lerp(selectedObj.transform.position, followPoint, lerpSpeed*Time.deltaTime).x,
-                Vector2.Lerp(selectedObj.transform.position, followPoint, lerpSpeed*Time.deltaTime).y, defaultZAxis);
+            Vector3 targetPosition = new Vector3(followPoint.x, followPoint.y, defaultZAxis);
+            
+            if (rb.isKinematic)
+            {
+                // For kinematic rigidbodies, use MovePosition for proper physics integration
+                rb.MovePosition(Vector3.Lerp(rb.position, targetPosition, lerpSpeed * 10 * Time.deltaTime));
+            }
+            else
+            {
+                // For non-kinematic rigidbodies, use velocity-based movement
+                Vector3 direction = (targetPosition - rb.position).normalized;
+                float distance = Vector3.Distance(rb.position, targetPosition);
+                rb.linearVelocity = direction * Mathf.Min(distance * lerpSpeed, maxSpeed);
+            }
+        }
+        else
+        {
+            // Fallback to transform manipulation if no rigidbody
+            if (Mathf.Abs(selectedObj.transform.position.x - followPoint.x) > 0.01f
+                && Mathf.Abs(selectedObj.transform.position.y - followPoint.y) > 0.01f)
+            {
+                selectedObj.transform.position = new Vector3(Vector2.Lerp(selectedObj.transform.position, followPoint, lerpSpeed*Time.deltaTime).x,
+                    Vector2.Lerp(selectedObj.transform.position, followPoint, lerpSpeed*Time.deltaTime).y, defaultZAxis);
+            }
         }
     }
-
     private void catchObject(InputAction.CallbackContext context)
     {
         hovering = true;
@@ -104,6 +119,21 @@ public class PlayerController : MonoBehaviour
         selected = false;
         Debug.Log("Released");
     }
+    
+    // Public method to check if a specific object is selected
+    public bool IsObjectSelected(GameObject obj)
+    {
+        return selected && selectedObj == obj;
+    }
+    
+    // Public method to force release the selected object
+    public void ForceReleaseObject()
+    {
+        selected = false;
+        selectedObj = null;
+        Debug.Log("Force Released");
+    }
+    
     private void PauseGame(InputAction.CallbackContext context)
     {
         if (!isPaused)
@@ -117,7 +147,6 @@ public class PlayerController : MonoBehaviour
             PauseMenu.SetActive(false);
         }
     }
-
     private void OnMouseOver()
     {
         hovering = true;
