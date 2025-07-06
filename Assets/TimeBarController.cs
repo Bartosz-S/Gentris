@@ -5,7 +5,11 @@ using UnityEngine.UI;
 public class TimeBarController : MonoBehaviour
 {
     private float timeForLevel = 1f;
-    private float remainTime { set; get; }
+    private float remainTime;
+    public float RemainTime
+    {
+        get { return remainTime; }
+    }
     private Slider slider;
     
 
