@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 434919267396003717}
   - component: {fileID: 6602777424899610487}
   - component: {fileID: 8213487599307622977}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ PrefabInstance:
       objectReference: {fileID: -1550514412580984892, guid: d3048a2a992e75049acc2f30fe8dc421, type: 3}
     - target: {fileID: 919132149155446097, guid: 4b8d141f6f93a0747a4cba35fc319018, type: 3}
       propertyPath: m_Name
-      value: Teanina
+      value: Teanina_old
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4b8d141f6f93a0747a4cba35fc319018, type: 3}
       propertyPath: m_Layer
