@@ -21,7 +21,7 @@ public class PauseMenu : MonoBehaviour
     }
     private void OnEnable()
     {
-        Time.timeScale = 0.5f;
+        Time.timeScale = 0f;
     }
     private void OnDisable()
     {
