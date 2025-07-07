@@ -54,6 +54,7 @@ public class DetectorLogic : MonoBehaviour
                     StartConnection(other.gameObject);
                     playerController.ForceReleaseObject();
                     Debug.Log("Connecting...");
+                    other.gameObject.transform.parent.gameObject.layer = 0;
                 }
             }
         }
