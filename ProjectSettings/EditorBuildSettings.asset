@@ -11,9 +11,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 2edc9ef9f235c3843b96ad3d453b0a57
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/stare/Bartok.unity
     guid: 00dce07798d620448898bb39f4ae03e3
+  - enabled: 1
+    path: Assets/Scenes/Level 01.unity
+    guid: 7be85082d75f357499b72ce76400909b
+  - enabled: 1
+    path: Assets/Scenes/Level 02.unity
+    guid: 75313e97d7d36c34397a6c1a4642bf0d
+  - enabled: 1
+    path: Assets/Scenes/Level 03.unity
+    guid: 25c6fcb7fdaef8746b28124c844ba383
+  - enabled: 1
+    path: Assets/Scenes/Level 04.unity
+    guid: edf9f8f05bbd7284ca0c17bc43875eb9
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
