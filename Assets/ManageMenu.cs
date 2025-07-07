@@ -9,7 +9,7 @@ public class ManageMenu : MonoBehaviour
     {
         mainMenu.SetActive(true);
         selectLevel.SetActive(false);
-        
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     public void OnLevelSelectButton()
