@@ -33,6 +33,10 @@ public class TimeBarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Time.timeScale < 0.95f)
+        {
+            return;
+        }
         UpdateTime();
         UpdateSlider();
     }
