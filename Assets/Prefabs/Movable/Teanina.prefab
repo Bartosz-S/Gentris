@@ -85,7 +85,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -0.091, y: 0, z: -0.0002}
-  m_LocalScale: {x: 0.036884386, y: -0.013424663, z: -0.025790798}
+  m_LocalScale: {x: 0.036884386, y: 0.01342466, z: 0.0257908}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4632629716091663180}
