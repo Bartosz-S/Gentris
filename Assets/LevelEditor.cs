@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 public class LevelEditor : MonoBehaviour
 {
     [SerializeField] private float timeForLevel;
@@ -6,9 +7,11 @@ public class LevelEditor : MonoBehaviour
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject winScreen;
     private LayerMask interactableLayer;
+    public UnityEvent endGame;
 
     private void Awake()
     {
+        gameObject.tag = "LevelEditor";
         SliderController = GameObject.FindGameObjectWithTag("TimeSlider").GetComponent<TimeBarController>();
         SliderController.TimeForLevel = timeForLevel;
         interactableLayer = LayerMask.NameToLayer("Movable");
@@ -32,6 +35,7 @@ public class LevelEditor : MonoBehaviour
             gameOverScreen.SetActive(true);
             SliderController.gameObject.transform.parent.gameObject.SetActive(false);
             Debug.Log("Game Over");
+            endGame.Invoke();
             return true;
         }
         return false;
@@ -47,6 +51,7 @@ public class LevelEditor : MonoBehaviour
                 return false;
             }
         }
+        endGame.Invoke();
         winScreen.SetActive(true);
         SliderController.gameObject.transform.parent.gameObject.SetActive(false);
         return true;
