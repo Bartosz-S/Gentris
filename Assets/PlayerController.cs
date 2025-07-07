@@ -26,8 +26,11 @@ public class PlayerController : MonoBehaviour
     {
         controller = new Controller();
         mainCam = Camera.main;
-        lvlEdit = GameObject.FindGameObjectWithTag("LevelEditor").GetComponent<LevelEditor>();
-        lvlEdit.endGame.AddListener(DisableMoving);
+        if(GameObject.FindGameObjectWithTag("LevelEditor") != null)
+        {
+            lvlEdit = GameObject.FindGameObjectWithTag("LevelEditor").GetComponent<LevelEditor>();
+            lvlEdit.endGame.AddListener(DisableMoving);
+        }
     }
     private void OnEnable()
     {
