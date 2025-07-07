@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.Events;
 public class DetectorLogic : MonoBehaviour
 {
     enum Type
@@ -17,7 +17,16 @@ public class DetectorLogic : MonoBehaviour
     private Vector3 targetPosition;
     private Quaternion targetRotation;
     private float connectionSpeed = 5f;
-    
+    private bool isJointed = false;
+    private bool canConnect = false;
+    public bool CanConnect {  get { return canConnect; } }
+    public UnityEvent ReadyToConnect = new UnityEvent();
+
+    private void Awake()
+    {
+        
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -47,10 +56,15 @@ public class DetectorLogic : MonoBehaviour
             if(isCorresponding(acidType, detected.acidType) && !isGlued && !isConnecting
                 && other.transform.parent.gameObject.layer == LayerMask.NameToLayer("Static"))
             {
+                canConnect = true;
                 // Only glue if this object is currently selected by the player
                 PlayerController playerController = FindObjectOfType<PlayerController>();
                 if (playerController != null && playerController.IsObjectSelected(transform.parent.gameObject))
                 {
+                    if (isJointed)
+                    {
+
+                    }
                     StartConnection(other.gameObject);
                     playerController.ForceReleaseObject();
                     Debug.Log("Connecting...");
@@ -58,13 +72,13 @@ public class DetectorLogic : MonoBehaviour
                 }
             }
         }
-       
     }
     private bool isCorresponding(Type acid1, Type acid2)
     {
         if(acid1 == Type.Guan && acid2 == Type.Cito || acid1 == Type.Cito && acid2 == Type.Guan
             || acid1 == Type.Tean && acid2 == Type.Aden || acid1 == Type.Aden && acid2 == Type.Tean)
         {
+            canConnect = true;
             return true;
         }
         return false;
