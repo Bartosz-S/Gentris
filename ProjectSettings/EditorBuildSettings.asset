@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Janek.unity
+    path: Assets/Scenes/stare/Janek.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 2edc9ef9f235c3843b96ad3d453b0a57
   - enabled: 1
-    path: Assets/Scenes/Bartok.unity
+    path: Assets/Scenes/stare/Bartok.unity
     guid: 00dce07798d620448898bb39f4ae03e3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
