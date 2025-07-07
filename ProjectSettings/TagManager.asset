@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TimeSlider
   - GameOver
+  - ComplexStruct
   layers:
   - Default
   - TransparentFX

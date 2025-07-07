@@ -45,7 +45,7 @@ public class DetectorLogic : MonoBehaviour
         if(other.gameObject.TryGetComponent<DetectorLogic>(out detected))
         {
             if(isCorresponding(acidType, detected.acidType) && !isGlued && !isConnecting
-                && detected.transform.parent.gameObject.layer == LayerMask.NameToLayer("Static"))
+                && other.transform.parent.gameObject.layer == LayerMask.NameToLayer("Static"))
             {
                 // Only glue if this object is currently selected by the player
                 PlayerController playerController = FindObjectOfType<PlayerController>();
